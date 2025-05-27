@@ -8,12 +8,11 @@ import bcrypt from "bcrypt";
 import pg from "pg";
 import { DatabaseUser } from "./types/database.js";
 
-
 const app = express();
-env.config();
+const PORT = 3000;
 
+env.config({path: "./.env"});
 
-const PORT: number = Number(process.env.PORT)
 const secret: string = process.env.SESSION_SECRET || (() => {
   throw new Error('SESSION_SECRET no está definido');
 })();;
@@ -37,7 +36,7 @@ const db = new pg.Client({
   host: process.env.PG_HOST,
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
-  port: PORT,
+  port: +process.env.PG_PORT!,
 });
 db.connect();
 
