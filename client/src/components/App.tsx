@@ -1,11 +1,11 @@
+import SideMenu from "./SideMenu/SideMenu";
+import Dashboard from "./Dasboard/Dashboard";
 
-import '../style/App.css';
-
-function App() {
-
+export default function App() {
   return (
-    <div className='text-red-500'><h1>Hello World</h1></div>
-  )
+    <main className="grid gap-4 p-4 grid-cols-[200px_1fr] h-screen">
+      <SideMenu />
+      <Dashboard />
+    </main>
+  );
 }
-
-export default App
