@@ -1,29 +1,60 @@
+import { useState } from "react";
 import { type IconType } from "react-icons"
-import { FiHome, FiUsers, FiPaperclip, FiLink, FiDollarSign } from "react-icons/fi"
+import { FiHome, FiUsers, FiPaperclip  } from "react-icons/fi"
 
-export default function RouteSelect() { 
-    return (
-        <div className="space-y-1">
-            <Route Icon={FiHome} selected={true} title="Dashboard" />
-            <Route Icon={FiUsers} selected={false} title="Team" />
-            <Route Icon={FiPaperclip} selected={false} title="Invoices" />
-            <Route Icon={FiLink} selected={false} title="Integrations" />
-            <Route Icon={FiDollarSign} selected={false} title="Finance" />
-        </div>
-    )
+interface SideMenuProps {
+  setActiveComponent: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function RouteSelect({ setActiveComponent }: SideMenuProps) {
+  const [activeRoute, setActiveRoute] = useState("Dashboard");
+
+  const handleClick = (route: string) => {
+    setActiveComponent(route);
+    setActiveRoute(route);
+  };
+
+
+  return (
+      <div className="space-y-1">
+          <Route 
+        onClick={() => handleClick("Dashboard")} 
+        Icon={FiHome} 
+        selected={activeRoute === "Dashboard"} 
+        title="Dashboard" 
+      />
+      <Route 
+        onClick={() => handleClick("Team")} 
+        Icon={FiUsers} 
+        selected={activeRoute === "Team"} 
+        title="Team" 
+      />
+      <Route 
+        onClick={() => handleClick("AddTransaction")} 
+        Icon={FiPaperclip} 
+        selected={activeRoute === "AddTransaction"} 
+        title="AddTransaction" 
+      />
+
+
+       </div>
+  )
 }
 
 const Route = ({
   selected,
   Icon,
   title,
+  onClick,
 }: {
   selected: boolean;
   Icon: IconType;
   title: string;
+  onClick: () => void;
 }) => {
   return (
     <button
+      onClick={onClick}
       className={`flex items-center justify-start gap-2 w-full rounded px-2 py-1.5 text-sm transition-[box-shadow,_background-color,_color] ${
         selected
           ? "bg-white text-stone-950 shadow"
