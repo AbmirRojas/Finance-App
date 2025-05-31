@@ -30,7 +30,7 @@ export default function StatCards() {
     )
 }
 
-const Card = ({title, value, pillText, trend, period }: {title: string, value: string, pillText: string, trend: "up" | "down", period: string}) => {
+export const Card = ({title, value, pillText, trend, period }: {title: string, value: string, pillText: string, trend: "up" | "down", period: string}) => {
     return (
         <div className="p-4 col-span-4 rounded border border-stone-300 shadow">
             <div className="flex mb-8 items-start justify-between">

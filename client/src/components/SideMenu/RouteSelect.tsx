@@ -18,25 +18,23 @@ export default function RouteSelect({ setActiveComponent }: SideMenuProps) {
   return (
       <div className="space-y-1">
           <Route 
-        onClick={() => handleClick("Dashboard")} 
-        Icon={FiHome} 
-        selected={activeRoute === "Dashboard"} 
-        title="Dashboard" 
-      />
-      <Route 
-        onClick={() => handleClick("Team")} 
-        Icon={FiUsers} 
-        selected={activeRoute === "Team"} 
-        title="Team" 
-      />
-      <Route 
-        onClick={() => handleClick("AddTransaction")} 
-        Icon={FiPaperclip} 
-        selected={activeRoute === "AddTransaction"} 
-        title="AddTransaction" 
-      />
-
-
+              onClick={() => handleClick("Dashboard")} 
+              Icon={FiHome} 
+              selected={activeRoute === "Dashboard"} 
+              title="Dashboard" 
+            />
+            <Route 
+              onClick={() => handleClick("Team")} 
+              Icon={FiUsers} 
+              selected={activeRoute === "Team"} 
+              title="Team" 
+            />
+            <Route 
+              onClick={() => handleClick("AddTransaction")} 
+              Icon={FiPaperclip} 
+              selected={activeRoute === "AddTransaction"} 
+              title="Add Transaction" 
+            />
        </div>
   )
 }
