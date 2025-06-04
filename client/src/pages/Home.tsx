@@ -2,7 +2,7 @@ import { useState } from "react";
 import SideMenu from "../components/SideMenu/SideMenu";
 import Dashboard from "../components/Dasboard/Dashboard"
 import Team from "../components/Team/Team";
-import AddTransaction from "../components/AddTransaction/AddTransaction";
+import Transaction from "../components/Transaction/Transaction";
 
 export default function App() {
   const [activeComponent, setActiveComponent] = useState("Dashboard");
@@ -13,8 +13,8 @@ export default function App() {
         return <Dashboard />;
       case "Team":
         return <Team />;
-      case "AddTransaction":
-        return <AddTransaction />;
+      case "Transaction":
+        return <Transaction />;
       default:
         return <Dashboard />;
     }

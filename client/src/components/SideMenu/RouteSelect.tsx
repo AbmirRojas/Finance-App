@@ -30,10 +30,10 @@ export default function RouteSelect({ setActiveComponent }: SideMenuProps) {
               title="Team" 
             />
             <Route 
-              onClick={() => handleClick("AddTransaction")} 
+              onClick={() => handleClick("Transaction")} 
               Icon={FiPaperclip} 
-              selected={activeRoute === "AddTransaction"} 
-              title="Add Transaction" 
+              selected={activeRoute === "Transaction"} 
+              title="Transaction" 
             />
        </div>
   )

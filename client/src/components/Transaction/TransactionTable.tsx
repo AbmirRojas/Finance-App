@@ -1,46 +1,34 @@
-import { FaDollarSign } from "react-icons/fa6";
+import { FaDollarSign } from "react-icons/fa6"
 import { FiArrowRight, FiMoreHorizontal } from "react-icons/fi"
 
-export default function RecentTransactions() {
-    return(
-        <div className="col-span-8 p-4 rounded border shadow border-stone-300">
-            <div className="p-4 flex items-center justify-between">
-                <h3 className="flex items-center gap-1.5 font-medium">
-                    <FaDollarSign /> Recent Transactions
-                </h3>       
-                <button className="text-sm text-violet-500 hover:underline">See All</button>       
+const TransactionData = [
+    { id: "1", merchant: "amazon", date: "Aug 20", amount: "$-9.75" },
+    { id: "2", merchant: "mercadona", date: "Aug 15", amount: "$-10.00" },
+    { id: "3", merchant: "ebay", date: "Aug 10", amount: "$-25.00" },  
+    { id: "4", merchant: "youtube", date: "Aug 2", amount: "$15.00" },    
+];
+
+export default function TransactionTable() {
+ 
+
+    return (
+        <div className="col-span-12 border border-stone-300 rounded shadow p-4">
+            <div className="flex items-center justify-center">
+                <h2 className="flex items-center gap-1.5 text-2xl font-medium my-3"><FaDollarSign />Transactions</h2>
             </div>
             <table className="w-full table-auto">
                 <TableHead />
                 <tbody>
-                    <TableRow
-                        id="#48149"
-                        merchant="Amazon"
-                        date="Aug 2nd"
-                        amount="$-9.75"
-                        order={1}
-                    />
-                    <TableRow
-                        id="#1942s"
-                        merchant="Mercadona"
-                        date="Aug 2nd"
-                        amount="$-21.25"
-                        order={2}
-                    />
-                    <TableRow
-                        id="#4192"
-                        merchant="Youtube"
-                        date="Aug 1st"
-                        amount="$94.75"
-                        order={3}
-                    />
-                    <TableRow
-                        id="#99481"
-                        merchant="Adobe"
-                        date="Aug 1st"
-                        amount="$-9.44"
-                        order={4}
-                    />   
+                    {TransactionData.map((rowData, index) => (
+                        <TableRow
+                            key={index}
+                            id={rowData.id}
+                            merchant={rowData.merchant}
+                            date={rowData.date}
+                            amount={rowData.amount}
+                            order={index+1}
+                        />
+                    ))} 
                 </tbody>
             </table>
         </div>
