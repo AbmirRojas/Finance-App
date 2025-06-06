@@ -1,7 +1,10 @@
-interface DatabaseUser {
-  id: number;
+export interface DatabaseUser {
+  idUser: number;
   email: string;
-  password: string;
+  fName: string;
+  lName: string;
+  storedhashedpassword: string;
+  idImage: number;
   // add other properties as needed
 }
 
