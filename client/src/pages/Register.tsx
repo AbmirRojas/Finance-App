@@ -60,7 +60,7 @@ export default function Register() {
 
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
-        setUser(response.data.user); // ✅ Ahora sí podemos usarlo desde contexto
+        setUser(response.data.user); // Ahora sí podemos usarlo desde contexto
         navigate("/home");
       } else {
         navigate("/login");

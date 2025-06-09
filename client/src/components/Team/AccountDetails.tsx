@@ -1,6 +1,7 @@
 import { BsFillPersonVcardFill } from "react-icons/bs";
+import spriteUrl from '../../assets/sprite.svg';
 
-export default function AccountDetails({ userName, userEmail }: { userName: string, userEmail: string }) {
+export default function AccountDetails({ userName, userEmail, imgAdventurer }: { userName: string, userEmail: string, imgAdventurer: string }) {
     return (
         <>
         <div className="border rounded border-stone-300 col-span-8 flex flex-col items-center shadow p-1.5 gap-1.5">
@@ -8,7 +9,9 @@ export default function AccountDetails({ userName, userEmail }: { userName: stri
 
             <div className="border rounded border-stone-200 w-3/4 flex items-center justify-between gap-1.5 p-1.5">
                 <div className="flex items-center gap-1">
-                    <img className="size-10 rounded shrink-0 bg-violet-500 shadow" src="https://api.dicebear.com/9.x/adventurer/svg?seed=Jack" alt="" />
+                    <svg className='size-10 rounded shrink-0 bg-violet-500 shadow'>
+                        <use xlinkHref={`${spriteUrl}${imgAdventurer}`}></use>
+                    </svg>
                     <div>
                         <span className="font-medium block">{userName}</span>
                         <span className="font-light text-stone-500 block">{userEmail}</span>

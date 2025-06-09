@@ -24,8 +24,8 @@ export default function Login() {
       });
 
       localStorage.setItem("token", response.data.token); // guarda token
-      setUser(response.data.user); // ✅ actualiza el contexto global
-      navigate("/home"); // redirige (ajusta la ruta si es necesario)
+      setUser(response.data.user); // actualiza el contexto global
+      navigate("/home"); // redirige 
 
     } catch (err) {
       if (axios.isAxiosError(err)) {
