@@ -13,7 +13,7 @@ interface UserData {
         last_name: string;
         email: string;
         profile_image: string;
-        balance?: number; // opcional por ahora
+        user_balance: number; 
     }
 
 
@@ -61,15 +61,15 @@ export default function Team() {
 
 
     const personalData = {
-        name: userData?.first_name || "loading...",
+        name: userData?.first_name + " " + userData?.last_name || "loading...",
         email: userData?.email || "loading...",
-        balance: 200000.00,
+        balance: userData?.user_balance || 0,
         imgAdventurer: userData?.profile_image || "loading..."
     }
 
     function handleBalance(): number {
         const teamBalance = (teamData ?? []).reduce((sum, member) => {
-            return sum + (member.balance ?? 0);
+            return sum + (member.user_balance ?? 0);
         }, 0);
 
         return teamBalance + (personalData.balance ?? 0);

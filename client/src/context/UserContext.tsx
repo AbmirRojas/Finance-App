@@ -1,11 +1,11 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 
 interface User {
-  id: number;
+  id_user: number;
   email: string;
-  firstName?: string;
-  lastName?: string;
-  profileImage?: string;
+  first_name?: string;
+  last_name?: string;
+  profile_image?: string;
 }
 
 interface UserContextType {
