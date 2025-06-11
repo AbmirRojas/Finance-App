@@ -66,6 +66,47 @@ app.get("/getAllUsers", verifyToken, async (req, res) => {
   }
 });
 
+// Función auxiliar para obtener el balance actual de un usuario
+app.get("/getUserBalance/:userId", verifyToken, async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const result = await db.query(
+      `SELECT user_balance FROM users WHERE id_user = $1`,
+      [userId]
+    );
+
+    if (result.rows.length === 0) {
+      res.status(404).json({ error: "Usuario no encontrado" });
+      return;
+    }
+
+    res.json([result.rows[0]]);
+
+  } catch (error) {
+    console.error("Error al obtener el balance: ", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
+app.get("/getTeamTransactions", verifyToken, async (req, res) => {
+  try {
+    const result = await db.query("SELECT * FROM transactions");
+
+    if (result.rows.length < 0) {
+      res.json({message: "no hay transacciones"});
+      return;
+    } else {
+      res.json(result.rows);
+    }
+
+  } catch (error) {
+    console.error("Error al obtener las transacciones: ", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+
+});
+
 //Post Routes
 
 app.post("/login", async (req, res) => {
@@ -238,33 +279,6 @@ app.post("/addTransaction", verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
-
-// Función auxiliar para obtener el balance actual de un usuario
-app.get("/getUserBalance/:userId", verifyToken, async (req, res) => {
-  const { userId } = req.params;
-
-  try {
-    const result = await db.query(
-      `SELECT user_balance FROM users WHERE id_user = $1`,
-      [userId]
-    );
-
-    if (result.rows.length === 0) {
-      res.status(404).json({ error: "Usuario no encontrado" });
-      return;
-    }
-
-    res.json({
-      userId: parseInt(userId),
-      balance: parseFloat(result.rows[0].balance) || 0
-    });
-
-  } catch (error) {
-    console.error("Error al obtener el balance: ", error);
-    res.status(500).json({ error: "Error interno del servidor" });
-  }
-});
-
 
 
 app.listen(PORT, () => {

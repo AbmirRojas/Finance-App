@@ -11,7 +11,7 @@ interface UserData {
         last_name: string;
         email: string;
         profile_image: string;
-        balance: number; 
+        user_balance: number; 
     }
 
 export default function AccountToggle() {

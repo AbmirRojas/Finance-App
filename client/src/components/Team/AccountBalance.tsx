@@ -6,7 +6,7 @@ export default function AccountBalance({balance}: {balance: number}) {
             <div className="flex mb-8 items-start justify-between">
                 <div>
                     <h3 className="text-stone-500 text-sm">Team Total Balance</h3>
-                    <p className="text-3xl font-semibold">$ {balance.toLocaleString('en')}</p>
+                    <p className="text-3xl font-semibold">€ {balance.toLocaleString('en')}</p>
                 </div>
             </div>
             
