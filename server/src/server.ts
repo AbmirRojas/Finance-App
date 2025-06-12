@@ -107,6 +107,27 @@ app.get("/getTeamTransactions", verifyToken, async (req, res) => {
 
 });
 
+app.get("/userTransactions/:userId", verifyToken, async (req, res) => {
+
+  const { userId } = req.params;
+
+  try {
+    const result = await db.query("SELECT * FROM transactions WHERE id_member = $1", [userId]);
+
+    if (result.rows.length < 0) {
+      res.json({message: "no hay transacciones"});
+      return;
+    } else {
+      res.json(result.rows);
+    }
+
+  } catch (error) {
+    console.error("Error al obtener las transacciones: ", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+
+});
+
 //Post Routes
 
 app.post("/login", async (req, res) => {

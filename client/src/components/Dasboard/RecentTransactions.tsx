@@ -1,7 +1,41 @@
-import { FaDollarSign } from "react-icons/fa6";
+import { useState, useEffect } from "react";
+import { FaDollarSign } from "react-icons/fa6"
 import { FiArrowRight, FiMoreHorizontal } from "react-icons/fi"
+import axios from "axios";
+
+interface TransactionDatabase {
+    id_transaction: number;
+    category: string;
+    id_member: number;
+    amount: number;
+    date: Date;
+    merchant: string;
+    type: "income" | "expense";
+}
 
 export default function RecentTransactions() {
+    const [error, setError] = useState("");
+    const [transactionData, setTeamTransactions] = useState<TransactionDatabase[] | null>(null);
+
+    useEffect(() => {
+
+        const fetchTransactionsData = async () => {
+            try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get<TransactionDatabase[]>("http://localhost:3000/getTeamTransactions", {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            setTeamTransactions(response.data);
+            
+            } catch (err) {
+            setError(err instanceof Error ? err.message : "Error al obtener los datos");
+            }
+        };
+
+    fetchTransactionsData();
+    }, []);
+
     return(
         <div className="col-span-8 p-4 rounded border shadow border-stone-300">
             <div className="p-4 flex items-center justify-between">
@@ -10,37 +44,26 @@ export default function RecentTransactions() {
                 </h3>       
                 <button className="text-sm text-violet-500 hover:underline">See All</button>       
             </div>
+
+            {error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    {error}
+                </div>
+            )}
+
             <table className="w-full table-auto">
                 <TableHead />
                 <tbody>
-                    <TableRow
-                        id="#48149"
-                        merchant="Amazon"
-                        date="Aug 2nd"
-                        amount="$-9.75"
-                        order={1}
-                    />
-                    <TableRow
-                        id="#1942s"
-                        merchant="Mercadona"
-                        date="Aug 2nd"
-                        amount="$-21.25"
-                        order={2}
-                    />
-                    <TableRow
-                        id="#4192"
-                        merchant="Youtube"
-                        date="Aug 1st"
-                        amount="$94.75"
-                        order={3}
-                    />
-                    <TableRow
-                        id="#99481"
-                        merchant="Adobe"
-                        date="Aug 1st"
-                        amount="$-9.44"
-                        order={4}
-                    />   
+                    {transactionData && transactionData.map((rowData, index) => (
+                        <TableRow
+                            key={index}
+                            id={rowData.id_transaction}
+                            merchant={rowData.merchant}
+                            date={rowData.date.toString()}
+                            amount={rowData.amount}
+                            order={index+1}
+                        />
+                    ))}  
                 </tbody>
             </table>
         </div>
@@ -61,7 +84,7 @@ const TableHead = () => {
     )
 }
 
-const TableRow = ({ id, merchant, date, amount, order }: { id: string, merchant: string, date: string, amount: string, order: number }) => {
+const TableRow = ({ id, merchant, date, amount, order }: { id: number, merchant: string, date: string, amount: number, order: number }) => {
     return  (
         <tr className={order % 2 ? "bg-stone-100 text-sm" : "text-sm" }>
             <td className="p-1.5">
