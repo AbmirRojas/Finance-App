@@ -131,14 +131,10 @@ export default function StatCards() {
 
     return (
         <>
-        {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                {error}
-            </div>
-        )}
+        
         <Card
             title="Gross Income"
-            value={grossIncome || null}
+            value={grossIncome || 0}
             pillText="%"
             trend={incomeTrend}
             period="Since account creation"
@@ -146,7 +142,7 @@ export default function StatCards() {
 
         <Card
             title="Total Balance"
-            value={userBalance?.user_balance || null}
+            value={userBalance?.user_balance || 0}
             pillText="%"
             trend={balanceTrend}
             period="Since account creation"
@@ -154,7 +150,7 @@ export default function StatCards() {
 
         <Card
             title="Year Total"
-            value={yearTotal}
+            value={yearTotal || 0}
             pillText="%"
             trend={yearTotal && yearTotal >= 0 ? "up" : "down"}
             period="Since Jan 1st"

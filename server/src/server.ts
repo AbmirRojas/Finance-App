@@ -152,7 +152,7 @@ app.post("/login", async (req, res) => {
           first_name: user.first_name,
           last_name: user.last_name,
           profile_image: user.profile_image,
-          balance: user.balance,
+          user_balance: user.user_balance,
           // otros campos que necesites
         };
                 
@@ -210,7 +210,7 @@ app.post("/register", async (req: Request, res: Response) => {
         first_name: newUser.first_name,
         last_name: newUser.last_name,
         profile_image: newUser.profile_image,
-        balance: newUser.balance,
+        user_balance: newUser.user_balance,
       }
     });
 
@@ -263,7 +263,7 @@ app.post("/addTransaction", verifyToken, async (req, res) => {
       return;
     }
 
-    const currentBalance = parseFloat(userBalanceResult.rows[0].balance) || 0;
+    const currentBalance = parseFloat(userBalanceResult.rows[0].user_balance) || 0;
     
     // Calcular el nuevo balance según el tipo de transacción
     let newBalance;

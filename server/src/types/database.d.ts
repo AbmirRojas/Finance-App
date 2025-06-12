@@ -5,7 +5,7 @@ export interface DatabaseUser {
   email: string;
   storedhashedpassword: string;
   profile_image: string;
-  balance: number;
+  user_balance: number;
   // add other properties as needed
 }
 
@@ -15,7 +15,7 @@ export interface userSession {
   last_name: string;
   email: string;
   profile_image: string;
-  balance: number;
+  user_balance: number;
 }
 
 export interface DatabaseTransaction {
